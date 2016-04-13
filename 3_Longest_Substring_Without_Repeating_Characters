@@ -1,0 +1,20 @@
+class Solution {
+    /*
+        假设当前最长的长度为l
+        以s[i]结尾的最长子序列为l[i] = s[m:i]
+        1、s[i+1]没有出现在s[m:i]中，那么l[i+1] = s[m:i+1]
+        2、s[i+1]出现在s[m:i]中下标为k，那么l[i+1] = s[k+1:i+1]
+    */
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> chari(256,-1);
+        int l = 0, m = 0;
+        for(int i=0; i<s.length(); i++)
+        {
+            m = max(m, chari[s[i]]+1);
+            chari[s[i]] = i;
+            l = max(l, i-m+1);
+        }
+        return l;
+    }
+};
