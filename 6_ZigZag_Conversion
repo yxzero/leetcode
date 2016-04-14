@@ -1,0 +1,37 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        string zigzag = "";
+        if(numRows == 1)
+            return s;
+        for(int i = 0; i<s.length(); i += (2*numRows-2))
+            zigzag += s[i];
+        int k = 2;
+        for(int i=1; i<(numRows-1); i++)
+        {
+            int j = i;
+            int tempx = 0;
+            if(j<s.length())
+            {
+                zigzag += s[j];
+                while(1)
+                {
+                    j += (2*numRows-2);
+                    tempx = j - k;
+                    if(tempx>=s.length())
+                        break;
+                    zigzag += s[tempx];
+                    if(j>=s.length())
+                        break;
+                    zigzag += s[j];
+                }
+            }
+            else
+                break;
+            k += 2;
+        }
+        for(int i = (numRows-1); i<s.length(); i += (2*numRows-2))
+            zigzag += s[i];
+        return zigzag;
+    }
+};
